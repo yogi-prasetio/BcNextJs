@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  GetProductRequest,
-  DelProductRequest,
-} from "../../redux-saga/action/ProductAction";
-import ProductUpdateForm from "./ProductUpdateForm";
-import ProductCreateForm from "./ProductCreateForm";
+  GetCategoryRequest,
+  DelCategoryRequest,
+} from "../../redux-saga/action/CategoryAction";
+import CategoryUpdateForm from "./CategoryUpdateForm";
+import CategoryCreateForm from "./CategoryCreateForm";
 import Layout from "@/component/layout";
 
-export default function ProductViewSaga() {
+export default function CategoryViewSaga() {
   const dispatch = useDispatch();
-  const { products } = useSelector((state: any) => state.productState);
+  const { categories } = useSelector((state: any) => state.categoryState);
   const [refresh, setRefresh] = useState<any>(false);
   const [display, setDisplay] = useState<any>(false);
   const [displayEdit, setDisplayEdit] = useState<any>(false);
   const [id, setId] = useState();
 
   useEffect(() => {
-    dispatch(GetProductRequest());
+    dispatch(GetCategoryRequest());
   }, [dispatch, refresh]);
 
   const onUpdate = (id: any) => {
@@ -26,7 +26,7 @@ export default function ProductViewSaga() {
   };
 
   const onDelete = async (id: any) => {
-    dispatch(DelProductRequest(id));
+    dispatch(DelCategoryRequest(id));
     window.alert("Data Successfully Deleted.");
     if (refresh == true) {
       setRefresh(false);
@@ -41,13 +41,13 @@ export default function ProductViewSaga() {
           <div className="container mt-6">
             <div className="card mt-4 mb-4">
               {displayEdit ? (
-                <ProductUpdateForm
+                <CategoryUpdateForm
                   setRefresh={setRefresh}
                   setDisplay={setDisplayEdit}
                   id={id}
                 />
               ) : display ? (
-                <ProductCreateForm
+                <CategoryCreateForm
                   setRefresh={setRefresh}
                   setDisplay={setDisplay}
                 />
@@ -91,7 +91,7 @@ export default function ProductViewSaga() {
                             href="#"
                             className="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white"
                           >
-                            Region
+                            Category
                           </a>
                         </div>
                       </li>
@@ -116,7 +116,7 @@ export default function ProductViewSaga() {
                               onClick={() => setDisplay(true)}
                             >
                               {" "}
-                              Add Product{" "}
+                              Add Category{" "}
                             </button>
                           </div>
                         </div>
@@ -130,19 +130,13 @@ export default function ProductViewSaga() {
                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                           <tr className="border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
                             <th scope="col" className="px-6 py-3">
-                              Product ID
+                              Category ID
                             </th>
                             <th scope="col" className="px-6 py-3">
-                              Product Name
+                              Category Name
                             </th>
                             <th scope="col" className="px-6 py-3">
                               Description
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                              Price
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                              Photo
                             </th>
                             <th scope="col" className="px-6 py-3 text-center">
                               Action
@@ -150,8 +144,8 @@ export default function ProductViewSaga() {
                           </tr>
                         </thead>
                         <tbody>
-                          {products &&
-                            products.map((item: any) => {
+                          {categories &&
+                            categories.map((item: any) => {
                               return (
                                 <>
                                   <tr
@@ -165,8 +159,6 @@ export default function ProductViewSaga() {
                                     <td className="px-6 py-4">
                                       {item.description}
                                     </td>
-                                    <td className="px-6 py-4">{item.price}</td>
-                                    <td className="px-6 py-4">{item.image}</td>
                                     <td className="px-6 py-4 text-center">
                                       <button
                                         type="submit"

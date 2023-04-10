@@ -20,9 +20,8 @@ export const doSigninSuccess = (payload: any) => ({
   payload,
 });
 
-export const doSignoutRequest = (payload: any) => ({
-  type: ActionUser.SIGNOUT_REQUEST,
-  payload,
+export const doSignoutRequest = () => ({
+  type: ActionUser.SIGNOUT_REQUEST
 });
 
 export const doSignoutSuccess = (payload: any) => ({

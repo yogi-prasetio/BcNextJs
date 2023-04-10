@@ -48,6 +48,7 @@ const findData = async (id: any) => {
   }
 };
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   Read,
   Create,

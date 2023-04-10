@@ -13,7 +13,7 @@ export default function RegionUpdate(props: any) {
 
       setRegion(data);
     });
-  }, []);
+  }, [props.id]);
 
   const HandleChange = (name: any) => (event: any) => {
     setValues({ ...values, [name]: event.target.value });

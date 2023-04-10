@@ -1,4 +1,5 @@
 import { call, put } from "redux-saga/effects";
+import { getCookie, setCookie, deleteCookie } from "cookies-next";
 import {
   doMessageNotif,
   doSigninSuccess,
@@ -26,9 +27,9 @@ function* handleSignin(action: any): any {
         doMessageNotif({ message: "user or password not match, try again" })
       );
     } else {
-      sessionStorage.setItem("access_token", result.data.access_token);
+      setCookie("access_token", result.data.access_token);
       const profile = yield call(UserApi.profile);
-      sessionStorage.setItem("profile", JSON.stringify(profile.data));
+      setCookie("profile", JSON.stringify(profile.data));
       yield put(doSigninSuccess(profile.data));
     }
   } catch (error) {
@@ -38,8 +39,13 @@ function* handleSignin(action: any): any {
 
 function* handleSignout() {
   try {
-    sessionStorage.clear();
-    yield put(doSignoutSuccess({ message: "user log out" }));
+    // // SESSION
+    // sessionStorage.clear();
+    // yield put(doSignoutSuccess({ message: "user log out" }));
+    // COOKIE
+    deleteCookie("access_token");
+    deleteCookie("profile");
+    yield put(doSignoutSuccess({ message: "Success Signout" }));
   } catch (error) {
     yield put(doMessageNotif(error));
   }

@@ -13,7 +13,7 @@ import {
 } from "../action/ProductAction";
 import ProductApi from "@/pages/api/Product";
 
-function* handleProduct() {
+function* handleProduct(): any {
   try {
     const result = yield call(ProductApi.read);
     yield put(GetProductSuccess(result));

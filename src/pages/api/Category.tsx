@@ -3,7 +3,7 @@ import config from "@/pages/config/config";
 
 const create = async (payload: any) => {
   try {
-    const result = await axios.post(`${config.domain}/product/`, payload);
+    const result = await axios.post(`${config.domain}/category/`, payload);
     return result;
   } catch (error) {
     return await error;
@@ -11,7 +11,7 @@ const create = async (payload: any) => {
 };
 const read = async () => {
   try {
-    const result = await axios.get(`${config.domain}/product/`);
+    const result = await axios.get(`${config.domain}/category/`);
     return result.data;
   } catch (error) {
     return await error;
@@ -19,16 +19,19 @@ const read = async () => {
 };
 const getOne = async (id: any) => {
   try {
-    const result = await axios.get(`${config.domain}/product/${id}`);
+    const result = await axios.get(`${config.domain}/category/${id}`);
     return result.data;
   } catch (error) {
     return await error;
   }
 };
 const update = async (data: any) => {
-  const id = parseInt(data.get("id"));
+  // const id = parseInt(data.get("id"));
   try {
-    const result = await axios.put(`${config.domain}/product/${id}`, data);
+    const result = await axios.put(
+      `${config.domain}/category/${data.id}`,
+      data
+    );
     return result;
   } catch (error) {
     return await error;
@@ -37,11 +40,12 @@ const update = async (data: any) => {
 
 const deleted = async (id: any) => {
   try {
-    const result = await axios.delete(`${config.domain}/product/${id}`);
+    const result = await axios.delete(`${config.domain}/category/${id}`);
     return result;
   } catch (error) {
     return await error;
   }
 };
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default { create, read, getOne, update, deleted };

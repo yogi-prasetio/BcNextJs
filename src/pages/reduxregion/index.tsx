@@ -19,7 +19,7 @@ export default function RegionRedux() {
 
   useEffect(() => {
     dispatch(GetRegionRequest());
-  }, [refrash]);
+  }, [dispatch, refrash]);
 
   const onUpdate = (id: any) => {
     setDisplayUpdate(true);

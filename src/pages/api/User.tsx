@@ -1,5 +1,6 @@
 import axios from "axios";
-import config from "../config/config";
+import config from "@/pages/config/config";
+import { getCookie } from "cookies-next";
 
 const create = async (payload: any) => {
   try {
@@ -45,7 +46,7 @@ const deleted = async (id: any) => {
 
 const signup = async (data: any) => {
   try {
-    const result = await axios.post(`${config.domain}/user/signup`, data);
+    const result = await axios.post(`${config.domain}/user/daftar`, data);
     return result;
   } catch (error) {
     return error;
@@ -63,7 +64,7 @@ const signin = async (data: any) => {
 
 const profile = async () => {
   axios.defaults.headers.common = {
-    Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+    Authorization: `Bearer ${getCookie("access_token")}`,
   };
   try {
     const result = await axios.get(`${config.domain}/user/profile`);
@@ -73,6 +74,7 @@ const profile = async () => {
   }
 };
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   create,
   read,
